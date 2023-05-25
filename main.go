@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/PuerkitoBio/goquery"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/labstack/echo/v4"
 	"log"
 	"net/http"
 	"os"
@@ -22,14 +22,23 @@ type StreamCast struct {
 func main() {
 	godotenv.Load()
 
-	e := echo.New()
+	gin.SetMode(gin.ReleaseMode)
 
-	e.GET("/", statsHandler)
+	router := gin.New()
 
-	e.Start(":80")
+	router.GET("/", statsHandler)
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	if err := router.Run(":" + port); err != nil {
+		log.Panicf("error: %s", err)
+	}
 }
 
-func statsHandler(c echo.Context) error {
+func statsHandler(c *gin.Context) {
 	url := os.Getenv("STREAMING_URL")
 
 	resp, err := http.Get(url)
@@ -78,6 +87,4 @@ func statsHandler(c echo.Context) error {
 	})
 
 	c.JSON(http.StatusOK, Result)
-
-	return nil
 }
