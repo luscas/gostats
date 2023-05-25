@@ -26,7 +26,7 @@ func main() {
 
 	e.GET("/", statsHandler)
 
-	e.Start(":8080")
+	e.Start(":80")
 }
 
 func statsHandler(c echo.Context) error {
