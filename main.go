@@ -12,7 +12,6 @@ import (
 
 type StreamCast struct {
 	StreamTitle      string
-	ContentType      string
 	Bitrate          string
 	CurrentListeners string
 	PeakListeners    string
