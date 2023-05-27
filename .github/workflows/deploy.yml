@@ -23,6 +23,19 @@ jobs:
 
     - name: Test
       run: go test -v
+  
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
 
-    - name: Heroku
-      run: git push heroku main
+    - name: Push
+      uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "quiet-brook-87537"
+        heroku_email: "lucaoxita@gmail.com"
+        usedocker: true
+      env:
+          NODE_ENV: production
+          STREAMING_URL: ${{ secrets.STREAMING_URL }}
