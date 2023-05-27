@@ -93,8 +93,8 @@ func statsHandler(c *gin.Context) {
 func userHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Hello World!",
-		"user": {
-			"email": "eu@lucaspaz.com"
-		}
+		"user": gin.H{
+			"email": "eu@lucaspaz.com",
+		},
 	})
 }
