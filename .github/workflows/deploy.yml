@@ -35,7 +35,6 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "quiet-brook-87537"
         heroku_email: "lucaoxita@gmail.com"
-        usedocker: true
       env:
           NODE_ENV: production
           STREAMING_URL: ${{ secrets.STREAMING_URL }}
