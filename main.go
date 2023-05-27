@@ -27,6 +27,7 @@ func main() {
 	router := gin.New()
 
 	router.GET("/", statsHandler)
+	router.GET("/user", userHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -87,4 +88,13 @@ func statsHandler(c *gin.Context) {
 	})
 
 	c.JSON(http.StatusOK, Result)
+}
+
+func userHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Hello World!",
+		"user": {
+			"email": "eu@lucaspaz.com"
+		}
+	})
 }
